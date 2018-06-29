@@ -6,22 +6,23 @@
 (function () {
     var adIsViewable = false,
         viewabilityTime = 0,
-        viewabilityPercentage = 0;
+        viewabilityPercentage = 0,
+        adElem = document.getElementById("ad").getBoundingClientRect();
 
 
     function checkViewAbility() {
         var adElement = document.getElementById("ad"),
             adElementDimensions = adElement.getBoundingClientRect(),
-            adElementViewAreaVertical = adElementDimensions.top + window.scrollY,
-            adElementViewAreaHorizontal = Math.abs(adElementDimensions.left) + adElementDimensions.width;
+            adElementViewAreaVertical = adElementDimensions.top + window.scrollY
 
         if (window.scrollY < adElementDimensions.height + adElementViewAreaVertical
             && Math.abs(adElementDimensions.left) < adElementDimensions.width) {
             adIsViewable = true;
-            var viewableX = adElementDimensions.width - Math.abs(adElementDimensions.left);
-            var viewableY = adElementDimensions.height - Math.abs(adElementDimensions.top);
-            // var percentY =adElementDimensions (adElementViewAreaVertical / adElementDimensions.height) / 100;
-            viewabilityPercentage = ((viewableX + viewableY) / (adElementDimensions.width + adElementDimensions.height)) * 100; //todo: this is WIP
+            var viewableY = adElementDimensions.height + adElementDimensions.top;
+            var viewableX = adElementDimensions.width + adElementDimensions.left;
+            var baseY = adElementDimensions.top < 0 ? adElementDimensions.height : adElementDimensions.height + adElementDimensions.top;
+            var baseX = adElementDimensions.left < 0 ? adElementDimensions.width : adElementDimensions.width + adElementDimensions.left;
+            viewabilityPercentage = parseInt(((viewableX * viewableY) / (baseX * baseY)) * 100);
         } else {
             adIsViewable = false;
             viewabilityPercentage = 0;
