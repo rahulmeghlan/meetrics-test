@@ -19,12 +19,13 @@
     </style>
 </head>
 <body>
-<div id="ad">
+<div id="ad" onclick="trackClickCount()">
     ADVERTISEMENT
 </div>
 </body>
 <script src="script.js"></script>
 <script>
+
     function printStatus() {
         if (typeof window.log === "function") {
             window.log()

@@ -7,17 +7,22 @@
     var adIsViewable = false,
         viewabilityTime = 0,
         viewabilityPercentage = 0,
-        adElem = document.getElementById("ad").getBoundingClientRect();
+        clickCount = 0;
 
-
+    /**
+     * Calculate viewability Percentage, viewability state and viewabilityTime and
+     * set the respective variable val
+     *
+     * */
     function checkViewAbility() {
         var adElement = document.getElementById("ad"),
             adElementDimensions = adElement.getBoundingClientRect(),
-            adElementViewAreaVertical = adElementDimensions.top + window.scrollY
+            adElementViewAreaVertical = adElementDimensions.top + window.scrollY;
 
         if (window.scrollY < adElementDimensions.height + adElementViewAreaVertical
             && Math.abs(adElementDimensions.left) < adElementDimensions.width) {
             adIsViewable = true;
+            viewabilityTime += 0.5;
             var viewableY = adElementDimensions.height + adElementDimensions.top;
             var viewableX = adElementDimensions.width + adElementDimensions.left;
             var baseY = adElementDimensions.top < 0 ? adElementDimensions.height : adElementDimensions.height + adElementDimensions.top;
@@ -29,6 +34,12 @@
         }
     }
 
+    function trackClickCount() {
+        ++clickCount;
+    }
+
+    window.trackClickCount = trackClickCount;
+
 
     /**
      * Logs the viewability values in the console
@@ -37,7 +48,7 @@
      */
     window.log = function () {
         checkViewAbility();
-        console.log("Ad is viewable: ", adIsViewable, "\nViewability time of the ad in sec:", viewabilityTime, "\nViewability percentage:", viewabilityPercentage);
+        console.log("Ad is viewable: ", adIsViewable, "\nViewability time of the ad in sec:", viewabilityTime, "\nViewability percentage:", viewabilityPercentage, "\nTotal Clicks:", clickCount);
     };
 })();
 
