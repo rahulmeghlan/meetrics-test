@@ -64,7 +64,9 @@
     }
 
     // Init the bindEvents function
-    bindEvents();
+    if (typeof module === 'undefined') {
+        bindEvents();
+    }
 
     /**
      * Logs the viewability values in the console
@@ -77,6 +79,19 @@
         }
         console.log("Ad is viewable: ", adIsViewable, "\nViewability time of the ad in sec:", viewabilityTime, "\nViewability percentage:", viewabilityPercentage, "\nTotal Clicks:", clickCount);
     };
+
+    /**
+     * Export the entities of the closure to test environment
+     * */
+    if (typeof module !== 'undefined') {
+        module.exports = {
+            adIsViewable: adIsViewable,
+            viewabilityTime: viewabilityTime,
+            viewabilityPercentage: viewabilityPercentage,
+            clickCount: clickCount
+        };
+    }
+
 })();
 
 /************************************************************************************************

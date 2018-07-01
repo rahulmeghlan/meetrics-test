@@ -1,0 +1,22 @@
+{
+  "name": "meetrics-challenge",
+  "version": "1.0.0",
+  "description": "A test challenge for meetrics to test the viewablility info of an ad.",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahulmeghlan/meetrics-test.git"
+  },
+  "author": "Rahul Meghlan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rahulmeghlan/meetrics-test/issues"
+  },
+  "homepage": "https://github.com/rahulmeghlan/meetrics-test#readme",
+  "devDependencies": {
+    "jest": "^23.2.0"
+  }
+}
