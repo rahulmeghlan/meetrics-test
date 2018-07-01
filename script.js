@@ -7,7 +7,8 @@
     var adIsViewable = false,
         viewabilityTime = 0,
         viewabilityPercentage = 0,
-        clickCount = 0;
+        clickCount = 0,
+        isWindowInFocus = true;
 
     /**
      * Calculate viewability Percentage, viewability state and viewabilityTime and
@@ -38,8 +39,23 @@
         ++clickCount;
     }
 
-    window.trackClickCount = trackClickCount;
+    function bindEvents() {
+        //Bind click to ad element
+        document.getElementById('ad').addEventListener('click', trackClickCount);
 
+        //Window Blur Event to update windowInFocus state
+        window.addEventListener('blur', function () {
+            isWindowInFocus = false;
+        });
+
+        //Window Focus Event to update windowInFocus state
+        window.addEventListener('focus', function () {
+            isWindowInFocus = true;
+        });
+    }
+
+    // Init the bindEvents function
+    bindEvents();
 
     /**
      * Logs the viewability values in the console
@@ -47,7 +63,9 @@
      * @override
      */
     window.log = function () {
-        checkViewAbility();
+        if (isWindowInFocus) {
+            checkViewAbility();
+        }
         console.log("Ad is viewable: ", adIsViewable, "\nViewability time of the ad in sec:", viewabilityTime, "\nViewability percentage:", viewabilityPercentage, "\nTotal Clicks:", clickCount);
     };
 })();
