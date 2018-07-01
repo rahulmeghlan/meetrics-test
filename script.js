@@ -4,6 +4,9 @@
  *                                                                                              *
  ************************************************************************************************/
 (function () {
+    /**
+     * Create & Init scope variable of the closure
+     * */
     var adIsViewable = false,
         viewabilityTime = 0,
         viewabilityPercentage = 0,
@@ -35,10 +38,16 @@
         }
     }
 
+    /**
+     * Track clicks and update clickCount variable val
+     * */
     function trackClickCount() {
         ++clickCount;
     }
 
+    /**
+     * A function where events are bind to the respective event handlers
+     * */
     function bindEvents() {
         //Bind click to ad element
         document.getElementById('ad').addEventListener('click', trackClickCount);
