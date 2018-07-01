@@ -48,3 +48,11 @@ that just logs in the console - you're more than welcome to do it!
 
 ## Delivery:
   Put your code in a git repository of your choice and send us the link.
+  
+## JEST Testing 
+ - Install the node dependencies using the following command in the project directory
+    `npm i`
+    
+- In order to run the test, write:
+	 `npm test`
+Test results will be printed on the console.
